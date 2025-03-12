@@ -22,10 +22,13 @@ This project is part of the IS601 course midterm assignment. The goal is to demo
     ```
 
 ## Usage
-Under development. Not supported in this version.
+In the project directory use the command `python main.py` to enter the program. Then enter one of the listed commands below.
 
 ## Features
-- Add: Adds two numbers
-- Subtract: Subtracts two numbers
-- Divide: Divides two numbers
-- Multiply: Multiplies two numbers
+This project uses a plugin architecture. The following are the current list of command plugins. 
+- add: Adds two numbers
+- subtract: Subtracts two numbers
+- divide: Divides two numbers
+- multiply: Multiplies two numbers
+- menu: Lists loaded plugins
+- exit: Exits the program 
