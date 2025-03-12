@@ -32,3 +32,6 @@ This project uses a plugin architecture. The following are the current list of c
 - multiply: Multiplies two numbers
 - menu: Lists loaded plugins
 - exit: Exits the program 
+
+## Testing
+When pushing to `main` and the `gitHubActions` branches GitHubActions will run `pytest --pylint --cov`. `pytest` will run tests in the tests folder.
