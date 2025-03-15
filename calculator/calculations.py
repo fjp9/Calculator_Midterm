@@ -48,4 +48,5 @@ class Calculations:
         cls.history = pd.read_csv(filename)
         cls.history['a'] = cls.history['a'].apply(Decimal)
         cls.history['b'] = cls.history['b'].apply(Decimal)
+        cls.history['operation'] = cls.history['operation'].apply(globals().__getitem__)
         cls.history['result'] = cls.history['result'].apply(Decimal)
