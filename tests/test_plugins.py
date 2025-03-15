@@ -181,7 +181,7 @@ def test_menu_command(monkeypatch, capsys):
 def test_load_command(monkeypatch, capsys):
     """ Test the LoadCommand execute method """
     # Simulate user input
-    inputs = iter(['./tests/data/history.csv'])
+    inputs = iter(['load'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Create a CommandHandler and AddCommand instance
