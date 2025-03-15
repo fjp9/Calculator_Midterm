@@ -17,3 +17,8 @@ class Calculation:
 
     def __repr__(self):
         return f"Calculation({self.a}, {self.b}, {self.operation.__name__})"
+    
+    def __eq__(self, other):
+        if isinstance(other, Calculation):
+            return (self.a == other.a and self.b == other.b and self.operation == other.operation)
+        return False

@@ -1,6 +1,7 @@
 import pandas as pd
 from decimal import Decimal
 from typing import Callable, List
+from calculator.operations import add, subtract, multiply, divide
 
 from calculator.calculation import Calculation
 
@@ -9,13 +10,14 @@ class Calculations:
 
     @classmethod
     def add_calculation(cls, calculation: Calculation):
-        new_entry = {
+        new_entry_data = {
             'a': calculation.a,
             'b': calculation.b,
             'operation': calculation.operation.__name__,
             'result': calculation.perform()
         }
-        cls.history = cls.history.append(new_entry, ignore_index=True)
+        new_entry = pd.DataFrame([new_entry_data])
+        cls.history = pd.concat([cls.history, new_entry], ignore_index=True)
 
     @classmethod
     def get_history(cls) -> pd.DataFrame:
