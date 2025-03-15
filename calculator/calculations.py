@@ -1,4 +1,5 @@
 import pandas as pd
+import logging
 from decimal import Decimal
 from typing import Callable, List
 from calculator.operations import add, subtract, multiply, divide
@@ -46,6 +47,7 @@ class Calculations:
     @classmethod
     def load_history(cls, filename: str):
         cls.history = pd.read_csv(filename)
+        logging.info(f"History loaded:\n{cls.history}")
         cls.history['a'] = cls.history['a'].apply(Decimal)
         cls.history['b'] = cls.history['b'].apply(Decimal)
         cls.history['operation'] = cls.history['operation'].apply(globals().__getitem__)

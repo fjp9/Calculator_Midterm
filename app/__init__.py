@@ -28,7 +28,7 @@ class App:
     
     def load_environment_variables(self):
         settings = {key: value for key, value in os.environ.items()}
-        logging.info("Environment variables loaded.")
+        logging.info("Environment variables loaded")
         return settings
     
     def get_environment_variable(self, env_var: str = 'ENVIRONMENT'):
@@ -47,6 +47,7 @@ class App:
                             plugin_instance = item()
                             plugin_instance.command_handler = self.command_handler
                             self.command_handler.register_command(plugin_name, plugin_instance)
+                            logging.info(f"Registered command: {plugin_name} - {item_name}")
                     except TypeError:
                         print(item_name)  # If item is not a class or unrelated class, just ignore
     

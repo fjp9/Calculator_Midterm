@@ -5,6 +5,7 @@ from app.plugins.multiply import MultiplyCommand
 from app.plugins.subtract import SubtractCommand
 from app.plugins.exit import ExitCommand
 from app.plugins.menu import MenuCommand
+from app.plugins.load import LoadCommand
 from app.commands import CommandHandler
 
 def test_add_command(monkeypatch, capsys):
@@ -176,3 +177,22 @@ def test_menu_command(monkeypatch, capsys):
 
     # Verify the output
     assert "Available plugins:\n- add\n- subtract\n- multiply\n- divide\n- exit\n" in captured.out, "MenuCommand Output mismatch"
+
+def test_load_command(monkeypatch, capsys):
+    """ Test the LoadCommand execute method """
+    # Simulate user input
+    inputs = iter(['./tests/data/history.csv'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    # Create a CommandHandler and AddCommand instance
+    load_command = LoadCommand()
+    load_command.command_handler = CommandHandler()
+
+    # Execute the LoadCommand
+    load_command.execute()
+
+    # Capture the output
+    captured = capsys.readouterr()
+
+    # Verify the output
+    assert "History loaded successfully from ./data/history.csv\n" in captured.out, "LoadCommand Output mismatch"
