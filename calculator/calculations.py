@@ -42,6 +42,8 @@ class Calculations:
     
     @classmethod
     def save_history(cls, filename: str):
+        # Ensure the operation column is stored as strings
+        cls.history['operation'] = cls.history['operation'].apply(lambda op: op.__name__ if callable(op) else op)
         cls.history.to_csv(filename, index=False)
     
     @classmethod

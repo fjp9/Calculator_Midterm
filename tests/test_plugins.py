@@ -6,6 +6,7 @@ from app.plugins.subtract import SubtractCommand
 from app.plugins.exit import ExitCommand
 from app.plugins.menu import MenuCommand
 from app.plugins.load import LoadCommand
+from app.plugins.save import SaveCommand
 from app.commands import CommandHandler
 
 def test_add_command(monkeypatch, capsys):
@@ -189,10 +190,29 @@ def test_load_command(monkeypatch, capsys):
     load_command.command_handler = CommandHandler()
 
     # Execute the LoadCommand
-    load_command.execute()
+    load_command.execute(test_filepath='./tests/data/test_history_load.csv')
 
     # Capture the output
     captured = capsys.readouterr()
 
     # Verify the output
-    assert "History loaded successfully from ./data/history.csv\n" in captured.out, "LoadCommand Output mismatch"
+    assert "History loaded successfully from ./tests/data/test_history_load.csv\n" in captured.out, "LoadCommand Output mismatch"
+
+def test_save_command(monkeypatch, capsys):
+    """ Test the SaveCommand execute method """
+    # Simulate user input
+    inputs = iter(['save'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    # Create a CommandHandler and AddCommand instance
+    save_command = SaveCommand()
+    save_command.command_handler = CommandHandler()
+
+    # Execute the SaveCommand
+    save_command.execute(test_filepath='./tests/data/test_history_save.csv')
+
+    # Capture the output
+    captured = capsys.readouterr()
+
+    # Verify the output
+    assert "History saved successfully to ./tests/data/test_history_save.csv\n" in captured.out, "SaveCommand Output mismatch"
