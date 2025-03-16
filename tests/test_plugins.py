@@ -8,6 +8,7 @@ from app.plugins.menu import MenuCommand
 from app.plugins.load import LoadCommand
 from app.plugins.save import SaveCommand
 from app.plugins.clear import ClearCommand
+from app.plugins.history import HistoryCommand
 from app.commands import CommandHandler
 
 def test_add_command(monkeypatch, capsys):
@@ -236,3 +237,23 @@ def test_clear_command(monkeypatch, capsys):
 
     # Verify the output
     assert "History cleared.\n" in captured.out, "ClearCommand Output mismatch"
+
+def test_history_command(monkeypatch, capsys):
+    """ Test the HistoryCommand execute method """
+    # Simulate user input
+    inputs = iter(['history'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    # Create a CommandHandler and AddCommand instance
+    history_command = HistoryCommand()
+    history_command.command_handler = CommandHandler()
+
+    # Execute the HistoryCommand
+    history_command.execute()
+
+    # Capture the output
+    captured = capsys.readouterr()
+
+    # Verify the output
+    assert "No history to display.\n" in captured.out, "HistoryCommand Output mismatch"
+    

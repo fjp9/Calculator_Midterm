@@ -22,7 +22,10 @@ class Calculations:
 
     @classmethod
     def get_history(cls) -> pd.DataFrame:
-        return cls.history
+        display_history = cls.history.copy()
+        display_history['operation'] = display_history['operation'].apply(lambda op: op.__name__ if callable(op) else op)
+        return display_history
+
 
     @classmethod
     def clear_history(cls):
