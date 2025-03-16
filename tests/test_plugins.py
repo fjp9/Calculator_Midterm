@@ -9,6 +9,7 @@ from app.plugins.load import LoadCommand
 from app.plugins.save import SaveCommand
 from app.plugins.clear import ClearCommand
 from app.plugins.history import HistoryCommand
+from app.plugins.delete import DeleteCommand
 from app.commands import CommandHandler
 
 def test_add_command(monkeypatch, capsys):
@@ -256,4 +257,22 @@ def test_history_command(monkeypatch, capsys):
 
     # Verify the output
     assert "No history to display.\n" in captured.out, "HistoryCommand Output mismatch"
-    
+
+def test_delete_command(monkeypatch, capsys):
+    """ Test the DeleteCommand execute method """
+    # Simulate user input
+    inputs = iter(['0'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    # Create a CommandHandler and AddCommand instance
+    delete_command = DeleteCommand()
+    delete_command.command_handler = CommandHandler()
+
+    # Execute the DeleteCommand
+    delete_command.execute()
+
+    # Capture the output
+    captured = capsys.readouterr()
+
+    # Verify the output
+    assert "No history to delete.\n" in captured.out, "DeleteCommand Output mismatch"

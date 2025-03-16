@@ -30,6 +30,11 @@ class Calculations:
     @classmethod
     def clear_history(cls):
         cls.history = cls.history.iloc[0:0]
+    
+    @classmethod
+    def delete_record(cls, index: int):
+        cls.history = cls.history.drop(index)
+        cls.history = cls.history.reset_index(drop=True)
 
     @classmethod
     def get_latest(cls) -> Calculation:
