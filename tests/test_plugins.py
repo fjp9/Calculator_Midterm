@@ -7,6 +7,7 @@ from app.plugins.exit import ExitCommand
 from app.plugins.menu import MenuCommand
 from app.plugins.load import LoadCommand
 from app.plugins.save import SaveCommand
+from app.plugins.clear import ClearCommand
 from app.commands import CommandHandler
 
 def test_add_command(monkeypatch, capsys):
@@ -216,3 +217,22 @@ def test_save_command(monkeypatch, capsys):
 
     # Verify the output
     assert "History saved successfully to ./tests/data/test_history_save.csv\n" in captured.out, "SaveCommand Output mismatch"
+
+def test_clear_command(monkeypatch, capsys):
+    """ Test the ClearCommand execute method """
+    # Simulate user input
+    inputs = iter(['clear'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    # Create a CommandHandler and AddCommand instance
+    clear_command = ClearCommand()
+    clear_command.command_handler = CommandHandler()
+
+    # Execute the ClearCommand
+    clear_command.execute()
+
+    # Capture the output
+    captured = capsys.readouterr()
+
+    # Verify the output
+    assert "History cleared.\n" in captured.out, "ClearCommand Output mismatch"
