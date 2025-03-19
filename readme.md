@@ -47,18 +47,18 @@ This project uses a plugin architecture. The following are the current list of c
 
 ### Examples
 The following are some examples of how to use the above commands:
-    ```
-    $ python main.py
-    >>> add
-    Enter two numbers separated by space: 2 2
-    The result of 2 add 2 is equal to 4
-    ```
-    ```
-    $ python main.py
-    >>> subtract
-    Enter two numbers separated by space: 2 2
-    The result of 2 subtract 2 is equal to 0
-    ```
+```
+$ python main.py
+>>> add
+Enter two numbers separated by space: 2 2
+The result of 2 add 2 is equal to 4
+```
+```
+$ python main.py
+>>> subtract
+Enter two numbers separated by space: 2 2
+The result of 2 subtract 2 is equal to 0
+```
 
 ## Testing
 When pushing to `main` and the `gitHubActions` branches GitHubActions will run `pytest --pylint --cov`. `pytest` will run tests in the tests folder.
@@ -67,26 +67,26 @@ When pushing to `main` and the `gitHubActions` branches GitHubActions will run `
 
 ### "Look Before You Leap" (LBYL) and "Easier to Ask for Forgiveness than Permission" (EAFP) Implementation
 The divide function implements a "Look Before You Leap" (LBYL) design strategy. In the [following function](calculator/operations.py) the program check to ensure the user is dividing by a valid number and then if not the program will return a cannot divide by zero error.  
-    ```python
-    def divide(a: Decimal, b: Decimal) -> Decimal:
-    if b == 0:
-        raise ValueError("Cannot divide by zero")
-    return a / b
-    ```
+```python
+def divide(a: Decimal, b: Decimal) -> Decimal:
+if b == 0:
+    raise ValueError("Cannot divide by zero")
+return a / b
+```
 
 The AddCommand class implements a "Easier to Ask for Forgiveness than Permission" (EAFP) design strategy. [In this case](app/plugins/add/__init__.py) we expect the user to be able to follow the instructions on the screen but in the case they do not the program handles the incorrect input and informs the user that they have made a mistake.
-    ```python
-    class AddCommand(Command):
-    def execute(self):
-        try:
-            a, b = input("Enter two numbers separated by space: ").split()
-            logging.info(f"Add command called with {a} and {b}")
-            CommandHandler.calculate_and_print(a, b, 'add')
-        except ValueError:
-            print("Please enter two numbers separated by space.")
-            logging.error("Invalid input.")
-        return
-    ```
+```python
+class AddCommand(Command):
+def execute(self):
+    try:
+        a, b = input("Enter two numbers separated by space: ").split()
+        logging.info(f"Add command called with {a} and {b}")
+        CommandHandler.calculate_and_print(a, b, 'add')
+    except ValueError:
+        print("Please enter two numbers separated by space.")
+        logging.error("Invalid input.")
+    return
+```
 
 ### Design Patterns
 
@@ -101,12 +101,12 @@ The command pattern is implemented in this app to make a easy to use user interf
 The [add](app/plugins/add/__init__.py) command is a example of a plugin used for the command pattern.
 
 #### Factory Method
-```calculator.calculation.create``` is the factory method for the Calculation class. Using this method we can easily create new instances of the Calculation class as needed.
+`calculator.calculation.create` is the factory method for the Calculation class. Using this method we can easily create new instances of the Calculation class as needed.
 
 [calculation.py](calculator/calculation.py) is where the factory method for the Calculation class is located.
 
 #### Environment Variables
-To manage the location of their history csv file the user must specify a file location in their ```.env``` file. This allows each user to modify the functionally of the program without having to modify the code within the function itself.
+To manage the location of their history csv file the user must specify a file location in their `.env` file. This allows each user to modify the functionally of the program without having to modify the code within the function itself.
 
 The [load](app/plugins/load/__init__.py) command makes use of the HISTORY_FILEPATH environment variable to load saved history from a csv file.
 
