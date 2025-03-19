@@ -49,7 +49,7 @@ class App:
                             self.command_handler.register_command(plugin_name, plugin_instance)
                             logging.info(f"Registered command: {plugin_name} - {item_name}")
                     except TypeError:
-                        print(item_name)  # If item is not a class or unrelated class, just ignore
+                        logging.debug(f"Class ignored when loading plugins: {item_name}")  # If item is not a class or unrelated class, just ignore
     
     def start(self):
         # Register commands here
