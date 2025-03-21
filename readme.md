@@ -114,3 +114,5 @@ The [load](app/plugins/load/__init__.py) command makes use of the HISTORY_FILEPA
 In this program logging is used to provide insight as to what is happening behind the scenes. This allows the developer to monitor the program for abnormal behavior. A very useful case where logging has been implemented is when loading the plugins. [Here](app/__init__.py) logging lets the developer know what plugins have been loaded into the program. This can help if experiencing unexpected behavior. There my be an instance where a command that the developer is calling is returning a logging error stating that the command does not exist. Then the developer sees that the command has been loaded through the logging.info message. This means they can narrow down where to look to fix the bug and hopefully resolve the issue much faster.
 
 ## Video Demonstration
+
+https://github.com/user-attachments/assets/2daa38c2-f72d-41f9-8bf4-c8321835c4ec
